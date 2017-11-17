@@ -1,0 +1,60 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 2017-11-2 8:05:06 by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="com.models.Goodsmeg" table="GOODSMEG">
+        <id name="ID" type="int">
+            <column name="ID" />
+            <generator class="assigned" />
+        </id>
+        <property name="GoodsStyle" type="java.lang.String">
+            <column name="GOODSSTYLE" />
+        </property>
+        <property name="GoodsName" type="java.lang.String">
+            <column name="GOODSNAME" />
+        </property>
+        <property name="GoodsNumber" type="java.lang.String">
+            <column name="GOODSNUMBER" />
+        </property>
+        <property name="GoodsUnit" type="java.lang.String">
+            <column name="GOODSUNIT" />
+        </property>
+        <property name="StartOmit" type="java.lang.String">
+            <column name="STARTOMIT" />
+        </property>
+        <property name="StartCity" type="java.lang.String">
+            <column name="STARTCITY" />
+        </property>
+        <property name="EndOmit" type="java.lang.String">
+            <column name="ENDOMIT" />
+        </property>
+        <property name="EndCity" type="java.lang.String">
+            <column name="ENDCITY" />
+        </property>
+        <property name="Style" type="java.lang.String">
+            <column name="STYLE" />
+        </property>
+        <property name="TransportTime" type="java.lang.String">
+            <column name="TRANSPORTTIME" />
+        </property>
+        <property name="Phone" type="java.lang.String">
+            <column name="PHONE" />
+        </property>
+        <property name="Link" type="java.lang.String">
+            <column name="LINK" />
+        </property>
+        <property name="IssueDate" type="java.lang.String">
+            <column name="ISSUEDATE" />
+        </property>
+        <property name="Remark" type="java.lang.String">
+            <column name="REMARK" />
+        </property>
+        <property name="Request" type="java.lang.String">
+            <column name="REQUEST" />
+        </property>
+        <property name="UserName" type="java.lang.String">
+            <column name="USERNAME" />
+        </property>
+    </class>
+</hibernate-mapping>

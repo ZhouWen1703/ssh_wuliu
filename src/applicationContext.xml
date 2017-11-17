@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.0.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.0.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.0.xsd">
+
+
+<!-- 1 配置数据源 采用连接池 -->
+<!-- c3p0 对象管理，注入对应属性值， 通过外部文件获取 -->
+<context:property-placeholder location="classpath:db.properties"/>
+<context:component-scan base-package="com"></context:component-scan>
+
+<bean id="datasource" class="com.mchange.v2.c3p0.ComboPooledDataSource">
+	<property name="user" value="${uname}"></property>
+	<property name="password" value="${password}"></property>
+	<property name="jdbcUrl" value="${jdbcUrl}"></property>
+	<property name="driverClass" value="${driverClass}"></property>
+	
+	<property name="initialPoolSize" value="${initPoolSize}"></property>
+	<property name="maxPoolSize" value="${maxPoolSize}"></property>
+</bean>
+
+
+<!-- 2  sessionFactory的管理 -->
+<!-- ioc 创建sessionFractory  使用hirenate4 -->
+<bean id="sessionFactory" class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
+
+	<!-- 数据源 -->
+	<property name="dataSource" ref="datasource"/>
+	<!-- hibernate 配置文件 -->
+	<property name="configLocation" value="classpath:hibernate.cfg.xml"/>
+	<!-- hbm 映射文件 -->
+	<property name="mappingLocations" value="classpath:com/models/*.hbm.xml"/>
+	<!--  通过路径找到映射文件 -->
+
+</bean>
+
+<!-- 3 事务管理 -->
+<bean id="transactionManager"
+		class="org.springframework.orm.hibernate4.HibernateTransactionManager">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+</bean>
+
+<!-- 2p配置事务属性-->
+	<tx:advice id="txAdvice" transaction-manager="transactionManager">
+		<tx:attributes>
+			<tx:method name="get*" read-only="true"/>
+			<tx:method name="find*" read-only="true"/>
+			<tx:method name="*"/>
+		</tx:attributes>
+	</tx:advice>
+	<!-- 3 配置事务切点，并把切点和事务属性关联起来 -->
+	<aop:config>
+		<aop:pointcut expression="execution(* com.services.*.*(..))" 
+		id="txPointcut"/>
+		<aop:advisor advice-ref="txAdvice" pointcut-ref="txPointcut"/>
+	</aop:config>
+</beans>

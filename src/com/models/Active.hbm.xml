@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 2017-11-1 13:11:17 by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="com.models.Active" table="ACTIVE">
+        <id name="ID" type="int">
+            <column name="ID" />
+            <generator class="assigned" />
+        </id>
+        <property name="Title" type="java.lang.String">
+            <column name="TITLE" />
+        </property>
+        <property name="Content" type="java.lang.String">
+            <column name="CONTENT" />
+        </property>
+        <property name="Author" type="java.lang.String">
+            <column name="AUTHOR" />
+        </property>
+        <property name="IssueDate" type="java.lang.String">
+            <column name="ISSUEDATE" />
+        </property>
+    </class>
+</hibernate-mapping>
